@@ -13,9 +13,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        DataBaseAPI.connectToDataBase()
+        DataBaseAPI.createSensorsTable()
+        let sensorsCount = DataBaseAPI.getSensorsCount()
+        if sensorsCount == 0 {
+            DataBaseAPI.addSensorsToDataBase()
+        }
+        
+        let sensors = DataBaseAPI.getAllSensors()
+        for s in sensors {
+            print("\(s.id) \(s.name) \(s.description)")
+        }
+        
         return true
     }
 
