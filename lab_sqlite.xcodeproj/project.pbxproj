@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1156A7521FFEEC84009A18A0 /* SensorsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156A7511FFEEC84009A18A0 /* SensorsController.swift */; };
+		1156A7541FFEF679009A18A0 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156A7531FFEF679009A18A0 /* Recording.swift */; };
 		11B829C41FFE991600B31762 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B829C31FFE991600B31762 /* AppDelegate.swift */; };
 		11B829C91FFE991600B31762 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B829C71FFE991600B31762 /* Main.storyboard */; };
 		11B829CB1FFE991600B31762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11B829CA1FFE991600B31762 /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		1156A7511FFEEC84009A18A0 /* SensorsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorsController.swift; sourceTree = "<group>"; };
+		1156A7531FFEF679009A18A0 /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		11B829C01FFE991600B31762 /* lab_sqlite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lab_sqlite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B829C31FFE991600B31762 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11B829C81FFE991600B31762 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 		11B829B71FFE991600B31762 = {
 			isa = PBXGroup;
 			children = (
+				1156A7531FFEF679009A18A0 /* Recording.swift */,
 				11B829E51FFEAFBE00B31762 /* SQLiteDemoHeader.h */,
 				11B829C21FFE991600B31762 /* lab_sqlite */,
 				11B829D71FFE991700B31762 /* lab_sqliteTests */,
@@ -223,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11B829E41FFEA44F00B31762 /* UtilitiesController.swift in Sources */,
+				1156A7541FFEF679009A18A0 /* Recording.swift in Sources */,
 				11B829EC1FFEC3CD00B31762 /* Sensor.swift in Sources */,
 				1156A7521FFEEC84009A18A0 /* SensorsController.swift in Sources */,
 				11B829C41FFE991600B31762 /* AppDelegate.swift in Sources */,

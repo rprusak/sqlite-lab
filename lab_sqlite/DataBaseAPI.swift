@@ -43,6 +43,27 @@ class DataBaseAPI {
         }
     }
     
+    static func createRecordingsTable() {
+        if (db == nil) {
+            print("no connection to database!")
+            return
+        }
+        
+        let query = """
+            CREATE TABLE IF NOT EXISTS recording (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                value REAL,
+                timestamp INTEGER,
+                sensorId INTEGER,
+                FOREIGN KEY(sensorId) REFERENCES sensor(id));
+            """
+        if sqlite3_exec(db, query, nil, nil,nil) == SQLITE_OK {
+            print("readings table created")
+        } else {
+            print("error while creating sensors table")
+        }
+    }
+    
     static func getSensorsCount() -> Int {
         var result: Int = -1;
         
@@ -137,4 +158,84 @@ class DataBaseAPI {
         
         return result
     }
+    
+    static func addRecordingsToDatabase(recordsCount: Int) {
+        if (db == nil) {
+            print("no connection to database!")
+            return
+        }
+        let sensors = DataBaseAPI.getAllSensors()
+        
+        if sensors.count == 0 {
+            print("there is no sensor")
+            return
+        }
+        
+        let query = """
+            INSERT INTO recording(value, timestamp, sensorId) VALUES(?, ?, ?);
+            """
+        
+        var insertStatement: OpaquePointer? = nil
+        
+        if sqlite3_prepare_v2(db, query, -1, &insertStatement, nil) == SQLITE_OK {
+            
+            for _ in 1...recordsCount {
+                let randomValue = Float(arc4random()) / Float(UINT32_MAX) * 100
+                let randomTimestamp = Int(NSDate().timeIntervalSince1970) - Int(arc4random_uniform(31536000))
+                let randomSensorId = Int(arc4random_uniform(UInt32(sensors.count)))
+                
+                sqlite3_bind_double(insertStatement, 1, Double(randomValue))
+                sqlite3_bind_int(insertStatement, 2, Int32(randomTimestamp))
+                sqlite3_bind_int(insertStatement, 3, Int32(randomSensorId))
+                
+                if sqlite3_step(insertStatement) == SQLITE_DONE {
+                    print("Successfully inserted row.")
+                } else {
+                    print("Could not insert row.")
+                }
+                
+                sqlite3_reset(insertStatement)
+            }
+            
+            sqlite3_finalize(insertStatement)
+        } else {
+            print("INSERT statement could not be prepared.")
+        }
+        
+    }
+    
+    static func getAllRecording() -> [Recording] {
+        var result: [Recording] = []
+        
+        if (db == nil) {
+            print("no connection to database!")
+            return result
+        }
+        
+        let query = """
+            SELECT * FROM recording;
+            """
+        var queryStatement: OpaquePointer? = nil
+        if sqlite3_prepare_v2(db, query, -1, &queryStatement, nil) == SQLITE_OK {
+            
+            while (sqlite3_step(queryStatement) == SQLITE_ROW) {
+                let id = sqlite3_column_int(queryStatement, 0)
+                let value = sqlite3_column_double(queryStatement, 1)
+                let timestamp = sqlite3_column_int(queryStatement, 2)
+                let sensorId = sqlite3_column_int(queryStatement, 3)
+                
+                let r: Recording = Recording(id: Int(id), value: value, timestamp: Int(timestamp), sensorId: Int(sensorId))
+                result.append(r)
+            }
+            
+        } else {
+            print("SELECT statement could not be prepared")
+        }
+        
+        sqlite3_finalize(queryStatement)
+        
+        return result
+    }
+    
+    
 }
