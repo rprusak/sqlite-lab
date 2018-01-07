@@ -18,6 +18,7 @@
 		11B829E81FFEB13300B31762 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B829E71FFEB13300B31762 /* libsqlite3.tbd */; };
 		11B829EA1FFEB62800B31762 /* DataBaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B829E91FFEB62800B31762 /* DataBaseAPI.swift */; };
 		11B829EC1FFEC3CD00B31762 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B829EB1FFEC3CD00B31762 /* Sensor.swift */; };
+		11EB53F620024FB700CA9404 /* RecordingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB53F520024FB700CA9404 /* RecordingsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		11B829E71FFEB13300B31762 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		11B829E91FFEB62800B31762 /* DataBaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAPI.swift; sourceTree = "<group>"; };
 		11B829EB1FFEC3CD00B31762 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
+		11EB53F520024FB700CA9404 /* RecordingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +73,6 @@
 		11B829B71FFE991600B31762 = {
 			isa = PBXGroup;
 			children = (
-				1156A7531FFEF679009A18A0 /* Recording.swift */,
 				11B829E51FFEAFBE00B31762 /* SQLiteDemoHeader.h */,
 				11B829C21FFE991600B31762 /* lab_sqlite */,
 				11B829D71FFE991700B31762 /* lab_sqliteTests */,
@@ -92,11 +93,13 @@
 		11B829C21FFE991600B31762 /* lab_sqlite */ = {
 			isa = PBXGroup;
 			children = (
+				1156A7531FFEF679009A18A0 /* Recording.swift */,
 				11B829E31FFEA44F00B31762 /* UtilitiesController.swift */,
 				11B829C31FFE991600B31762 /* AppDelegate.swift */,
 				11B829EB1FFEC3CD00B31762 /* Sensor.swift */,
 				11B829E91FFEB62800B31762 /* DataBaseAPI.swift */,
 				11B829C71FFE991600B31762 /* Main.storyboard */,
+				11EB53F520024FB700CA9404 /* RecordingsController.swift */,
 				1156A7511FFEEC84009A18A0 /* SensorsController.swift */,
 				11B829CA1FFE991600B31762 /* Assets.xcassets */,
 				11B829CC1FFE991600B31762 /* LaunchScreen.storyboard */,
@@ -225,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11EB53F620024FB700CA9404 /* RecordingsController.swift in Sources */,
 				11B829E41FFEA44F00B31762 /* UtilitiesController.swift in Sources */,
 				1156A7541FFEF679009A18A0 /* Recording.swift in Sources */,
 				11B829EC1FFEC3CD00B31762 /* Sensor.swift in Sources */,

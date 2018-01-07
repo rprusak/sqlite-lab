@@ -126,21 +126,37 @@
             </objects>
             <point key="canvasLocation" x="-1662" y="-467"/>
         </scene>
-        <!--Recordings-->
+        <!--Records-->
         <scene sceneID="bZG-OJ-m6a">
             <objects>
-                <tableViewController id="P2q-q9-BG6" sceneMemberID="viewController">
+                <tableViewController id="P2q-q9-BG6" customClass="RecordingsController" customModule="lab_sqlite" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VKh-kq-Bl2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="exE-Vj-vR4">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReadingCell" textLabel="XlO-8B-7Eo" detailTextLabel="vtz-1a-6e2" style="IBUITableViewCellStyleSubtitle" id="exE-Vj-vR4">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="exE-Vj-vR4" id="k3x-vF-r6c">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XlO-8B-7Eo">
+                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vtz-1a-6e2">
+                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -149,7 +165,10 @@
                             <outlet property="delegate" destination="P2q-q9-BG6" id="0ia-sg-Emz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recordings" id="dLK-vB-sOy"/>
+                    <navigationItem key="navigationItem" title="Records" id="dLK-vB-sOy"/>
+                    <connections>
+                        <outlet property="tableView" destination="VKh-kq-Bl2" id="4mk-6A-XrQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Vg-jv-2az" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -203,11 +222,11 @@
             </objects>
             <point key="canvasLocation" x="321" y="571"/>
         </scene>
-        <!--Recordings-->
+        <!--Records-->
         <scene sceneID="jpn-Mj-pxd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XlG-YV-4ex" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Recordings" id="v0C-K2-PvD"/>
+                    <tabBarItem key="tabBarItem" title="Records" id="v0C-K2-PvD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Ba-N3-9gT">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
