@@ -59,23 +59,30 @@ class UtilitiesController: UIViewController, UITextFieldDelegate {
     
     @IBAction func onDeleteAllRecordsButtonClicked(_ sender: Any) {
         print("delete all records button clicked")
+        DataBaseAPI.deleteAllRecords()
         self.resultTextView.text = ""
     }
     
     @IBAction func onFindLargestAndSmallestTimestampButtonClicked(_ sender: UIButton) {
         print("find largest and smallest timestamp clicked")
-        self.resultTextView.text = ""
+        let result = DataBaseAPI.getSmallestAndLargestTimestamp()
+        self.resultTextView.text = "Smallest timestamp: \(result.min), largest timestamp: \(result.max)"
     }
     
     @IBAction func onCalculateAverageReadingValuesButtonClicked(_ sender: UIButton) {
         print("calculate average values")
-        self.resultTextView.text = ""
+        let result = DataBaseAPI.getAverageRecordValue()
+        self.resultTextView.text = "Average value: \(result)"
+        
     }
     
     @IBAction func onCalculateNumberOfReadingAndAverageButtonClicked(_ sender: UIButton) {
         print("calculate number and average")
         self.resultTextView.text = ""
+        let result = DataBaseAPI.getAverageValueAndRecordsNumberPerSensor()
+        for r in result {
+            self.resultTextView.text = self.resultTextView.text + "Sensord: \(r.sensor) \n Values: \(r.values) \n Average: \(r.average) \n"
+        }
     }
-    
     
 }

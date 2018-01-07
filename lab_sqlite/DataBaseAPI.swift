@@ -237,5 +237,101 @@ class DataBaseAPI {
         return result
     }
     
+    static func deleteAllRecords() {
+        if (db == nil) {
+            print("no connection to database!")
+            return
+        }
+        
+        let query = """
+            DELETE FROM recording;
+            """
+        
+        if sqlite3_exec(db, query, nil, nil,nil) == SQLITE_OK {
+            print("all records deleted")
+        } else {
+            print("error while deleting records")
+        }
+        
+    }
+    
+    static func getSmallestAndLargestTimestamp() -> (min: Int, max: Int) {
+        if (db == nil) {
+            print("no connection to database!")
+            return (0, 0)
+        }
+        
+        var smallestTimestamp: Int = 0
+        var largestTimestamp: Int = 0
+        
+        let query = """
+            SELECT min(timestamp), max(timestamp) FROM recording;
+            """
+        var queryStatement: OpaquePointer? = nil
+        if sqlite3_prepare_v2(db, query, -1, &queryStatement, nil) == SQLITE_OK {
+            while (sqlite3_step(queryStatement) == SQLITE_ROW) {
+                smallestTimestamp = Int(sqlite3_column_int(queryStatement, 0))
+                largestTimestamp = Int(sqlite3_column_int(queryStatement, 1))
+            }
+        } else {
+            print("SELECT statement could not be prepared")
+        }
+        
+        sqlite3_finalize(queryStatement)
+        
+        return (smallestTimestamp, largestTimestamp)
+    }
+    
+    static func getAverageRecordValue() -> Double {
+        var result: Double = 0.0
+        if (db == nil) {
+            print("no connection to database!")
+            return result
+        }
+        
+        let query = """
+            SELECT avg(value) FROM recording;
+            """
+        var queryStatement: OpaquePointer? = nil
+        if sqlite3_prepare_v2(db, query, -1, &queryStatement, nil) == SQLITE_OK {
+            while (sqlite3_step(queryStatement) == SQLITE_ROW) {
+                result = sqlite3_column_double(queryStatement, 0)
+            }
+        } else {
+            print("SELECT statement could not be prepared")
+        }
+        
+        sqlite3_finalize(queryStatement)
+        
+        return result
+    }
+    
+    static func getAverageValueAndRecordsNumberPerSensor() -> [(sensor: Int, values: Int, average: Double)] {
+        var result: [(sensor: Int, values: Int, average: Double)] = []
+        
+        if (db == nil) {
+            print("no connection to database!")
+            return []
+        }
+        
+        let query = """
+            select sensorId, count(*), avg(value) from recording group by sensorId;
+            """
+        var queryStatement: OpaquePointer? = nil
+        if sqlite3_prepare_v2(db, query, -1, &queryStatement, nil) == SQLITE_OK {
+            while (sqlite3_step(queryStatement) == SQLITE_ROW) {
+                let sensorId = sqlite3_column_int(queryStatement, 0)
+                let values = sqlite3_column_int(queryStatement, 1)
+                let avg = sqlite3_column_double(queryStatement, 2)
+                result.append((sensor: Int(sensorId), values: Int(values), average: avg))
+            }
+        } else {
+            print("SELECT statement could not be prepared")
+        }
+        
+        sqlite3_finalize(queryStatement)
+        
+        return result
+    }
     
 }

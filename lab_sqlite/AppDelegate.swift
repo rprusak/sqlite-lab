@@ -22,12 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if sensorsCount == 0 {
             DataBaseAPI.addSensorsToDataBase()
         }
-        
-        let sensors = DataBaseAPI.getAllSensors()
-        for s in sensors {
-            print("\(s.id) \(s.name) \(s.description)")
-        }
-        
+                
         return true
     }
 
