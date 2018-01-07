@@ -47,42 +47,52 @@ class UtilitiesController: UIViewController, UITextFieldDelegate {
         let startTime = NSDate()
         DataBaseAPI.addRecordingsToDatabase(recordsCount: recordsToGenerate)
         let finishTime = NSDate()
-        
-        let recordings = DataBaseAPI.getAllRecording()
-        for r in recordings {
-            print("\(r.id) \(r.value) \(r.timestamp) \(r.sensorId)")
-        }
-        
+                
         let measuredTime = finishTime.timeIntervalSince(startTime as Date)
         self.resultTextView.text = "Generating \(recordsToGenerate) records took \(measuredTime)";
     }
     
     @IBAction func onDeleteAllRecordsButtonClicked(_ sender: Any) {
         print("delete all records button clicked")
+        let startTime = NSDate()
         DataBaseAPI.deleteAllRecords()
-        self.resultTextView.text = ""
+        let finishTime = NSDate()
+        let measuredTime = finishTime.timeIntervalSince(startTime as Date)
+        self.resultTextView.text = "Deleting records took \(measuredTime)";
     }
     
     @IBAction func onFindLargestAndSmallestTimestampButtonClicked(_ sender: UIButton) {
         print("find largest and smallest timestamp clicked")
+        let startTime = NSDate()
         let result = DataBaseAPI.getSmallestAndLargestTimestamp()
-        self.resultTextView.text = "Smallest timestamp: \(result.min), largest timestamp: \(result.max)"
+        let finishTime = NSDate()
+        let measuredTime = finishTime.timeIntervalSince(startTime as Date)
+        self.resultTextView.text = "Smallest timestamp: \(result.min), largest timestamp: \(result.max), time: \(measuredTime)"
     }
     
     @IBAction func onCalculateAverageReadingValuesButtonClicked(_ sender: UIButton) {
         print("calculate average values")
+        let startTime = NSDate()
         let result = DataBaseAPI.getAverageRecordValue()
-        self.resultTextView.text = "Average value: \(result)"
+        let finishTime = NSDate()
+        let measuredTime = finishTime.timeIntervalSince(startTime as Date)
+        self.resultTextView.text = "Average value: \(result),  time: \(measuredTime)"
         
     }
     
     @IBAction func onCalculateNumberOfReadingAndAverageButtonClicked(_ sender: UIButton) {
         print("calculate number and average")
         self.resultTextView.text = ""
+        let startTime = NSDate()
         let result = DataBaseAPI.getAverageValueAndRecordsNumberPerSensor()
+        let finishTime = NSDate()
+        let measuredTime = finishTime.timeIntervalSince(startTime as Date)
+        
         for r in result {
-            self.resultTextView.text = self.resultTextView.text + "Sensord: \(r.sensor) \n Values: \(r.values) \n Average: \(r.average) \n"
+            self.resultTextView.text = self.resultTextView.text + "Sensord: \(r.sensor) \nValues: \(r.values) \nAverage: \(r.average) \n"
         }
+        
+        self.resultTextView.text = self.resultTextView.text + "\n\(measuredTime)"
     }
     
 }

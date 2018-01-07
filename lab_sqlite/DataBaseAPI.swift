@@ -175,6 +175,10 @@ class DataBaseAPI {
             INSERT INTO recording(value, timestamp, sensorId) VALUES(?, ?, ?);
             """
         
+        if sqlite3_exec(db, "BEGIN TRANSACTION", nil, nil, nil) != SQLITE_OK {
+            print("begin transaction failed");
+        }
+        
         var insertStatement: OpaquePointer? = nil
         
         if sqlite3_prepare_v2(db, query, -1, &insertStatement, nil) == SQLITE_OK {
@@ -200,6 +204,10 @@ class DataBaseAPI {
             sqlite3_finalize(insertStatement)
         } else {
             print("INSERT statement could not be prepared.")
+        }
+        
+        if sqlite3_exec(db, "COMMIT TRANSACTION", nil, nil, nil) != SQLITE_OK {
+            print("commit transaction failed");
         }
         
     }
